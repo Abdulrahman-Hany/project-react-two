@@ -1,38 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import ProductCard from "./components/ProductCard";
+import Modal from "./components/ui/Modal";
+import { productList } from "./data";
+import { Button } from "@headlessui/react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // STATE
+  let [isOpen, setIsOpen] = useState(true);
 
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+  //runder
+  const renderProductList = productList.map((product) => (
+    <ProductCard key={product.id} product={product} />
+  ));
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <main className="container mx-auto ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-y-6">
+        {renderProductList}
       </div>
-      <h1>Vite + React</h1>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+      <Modal isOpen={isOpen} closeModal={closeModal} title="Add New Product">
+       <div className="flex items-center space-x-3">
+        <Button className="bg-blue-700 hover:bg-indigo-800">Submit</Button>
+        <Button className="bg-gray-300 hover:bg-gray-600">Cancel</Button>
+       </div>
+      </Modal>
+    </main>
+  );
 }
 
-export default App
+export default App;
