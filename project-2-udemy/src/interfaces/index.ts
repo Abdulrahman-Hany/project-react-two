@@ -13,12 +13,12 @@ export interface IProduct {
   };
 }
 
-// export interface IFormInput {
-//   id: string;
-//   name: ProductNameTypes;
-//   label: string;
-//   type: string;
-// }
+export interface IFormInput {
+  id: string;
+  name: 'title' | 'description' | "imageURL" | "price";
+  label: string;
+  type: string;
+}
 
 // export interface ICategory {
 //   id: string;
