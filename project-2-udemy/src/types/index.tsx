@@ -1,0 +1,1 @@
+export type prouduactName = 'title' | 'description' | "imageURL" | "price";
